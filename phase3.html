@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Phase3</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+        .error {
+            color:red;
+        }
+
+        .hidden {
+            display: none;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="alert alert-success" role="alert">
+        Student Details
+    </div>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div>
+                    <div class="form-group">
+                            
+                        <label>Image</label>
+                        <span class="error hidden" id="spnImage">*</span>
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-ms-1 student-preview">
+                <div class="card" style="width: 18rem;">
+                    <img  class="card-img-top" alt="..." id="imgId" />
+                    <input type="url" id="idSrcImg" placeholder="Please Enter Url Image">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+        </div>
+        <div class="row mt-3 ">
+        
+            <div class="col-md-2" >
+                
+                <label class="label">Hobbies</label>
+            <!-- <span class="error hidden" id="spnHobbies">*</span> -->    
+                
+            </div>
+            <div class="col-ms student-preview">
+                <input type="checkbox" hobby value="Chess"> Chess
+                <input type="checkbox" hobby value="Movies"> Movies
+                <input type="checkbox" hobby value="Sport"> Sport
+                <input type="checkbox" hobby value="Cars"> Cars
+                <input type="checkbox" hobby value="Dolls"> Dolls
+            </div>
+        
+        
+        </div>
+        <div class="row mt-3">
+        </div>
+        <div class="row mt-3">
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2 student-preview">
+        
+            </div>
+        
+            <div class="col-md-1 student-preview">
+                <button type="button" id="btnBack" class="btn btn-info">Back</button>
+            </div>
+        
+            <div class="col-md-1 student-preview">
+                <button type="button" id="btnReset" class="btn btn-info" onclick="resetDetails()">Reset</button>
+            </div>
+            <div class="col-md-1 student-preview">
+                <button type="button" id="btnNext" class="btn btn-info" onclick="saveDetails()">Next</button>
+            </div>
+        </div>
+    
+    </div>
+</body>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"
+></script>
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"
+></script>
+
+<script>
+var listhobbies=[];
+const student={};
+var btnReset,btnNext,btnBack,imgId,spnImage,spnHobbies,hobbies,idSrcImg;
+
+(()=>{
+    btnNext=btnNext||document.querySelector("#btnNext");
+    btnBack=btnBack||document.querySelector("#btnBack");
+    imgId=imgId||document.querySelector("#imgId");
+   /* spnHobbies=spnHobbies||document.querySelector("#spnHobbies");*/
+    spnImage=spnImage||document.querySelector("#spnImage");
+    hobbies=hobbies||document.querySelectorAll('[type=checkbox]');
+    idSrcImg=idSrcImg||document.querySelector('#idSrcImg');
+})();
+
+    (() => {
+        if (localStorage.student) {
+            const student = JSON.parse(localStorage.student);
+            if (!student.hasOwnProperty('city') && !student.hasOwnProperty('street') && !student.hasOwnProperty('number')) {
+                alert("You have to fill the data in phase 2");
+                // window.location.href ='phase2.html'; i have to put here the page url of phase 2
+            }
+            else  {
+                //for display details after refresh
+                if (student.hasOwnProperty('img') && student.hasOwnProperty('hobbies')) {
+                    idSrcImg.value = student.img;
+                    const StudentHobbies = student.hobbies;
+                   
+                    for (const hobby of hobbies) {
+                        alert(StudentHobbies.includes(hobby.value));
+                        if (StudentHobbies.includes(hobby.value)) {
+                            hobby.checked = true;
+                        }
+                    }
+                }
+            }
+        }
+
+    })();
+function validateInputs(){
+    if(listhobbies.length>0){
+        listhobbies.splice(0,listhobbies.length);
+    }
+
+    for (const hobby of hobbies) {
+        if (hobby.checked) {
+            listhobbies.push(hobby.value);
+        }
+    }
+    if(idSrcImg.value.length==0 && listhobbies.length==0){
+        spnImage.className= spnImage.className.replace('hidden','');
+       /* spnHobbies.className= spnHobbies.className.replace('hidden','');*/
+        return false;
+    }
+  
+    if(idSrcImg.value.length==0){
+        spnImage.className= spnImage.className.replace('hidden','');
+        return false;
+    }
+    else{
+        spnImage.className='error hidden';
+        imgId.src=idSrcImg.value;
+    }
+    /*if(listhobbies.length==0){
+        
+        spnHobbies.className= spnHobbies.className.replace('hidden','');
+        return false;
+        
+    }*/
+    
+    
+
+    return true;
+}
+function saveToObjectDetails(){
+imgId.src=idSrcImg.value;
+student.hobbies=listhobbies;
+student.img=idSrcImg.value;
+localStorage.student = JSON.stringify(student);
+}
+function saveDetails() {
+    
+    var isOK = validateInputs();
+    
+    
+    if(isOK){
+        saveToObjectDetails();
+        spnImage.className='error hidden';
+      /*  spnHobbies.className='error hidden';*/
+      //   window.location.href="phase4.html";
+    }
+}
+function resetDetails(){
+    idSrcImg.value="";
+    imgId.src="";
+    for (const hobby of hobbies) {
+        if (hobby.checked) {
+            hobby.checked = false;
+        }
+    }
+
+}
+btnBack.addEventListener('click',()=>{
+//   window.location.href="phase2.html";
+});
+</script>
+</html>
