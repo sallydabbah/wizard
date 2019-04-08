@@ -12,6 +12,9 @@
       crossorigin="anonymous"
     />
     <style>
+        body{
+            background: linear-gradient(to right, #9cc4d8, #7e92b2);
+        }
         .error {
             color:red;
         }
@@ -28,7 +31,7 @@
     </div>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div>
                     <div class="form-group">
                             
@@ -110,7 +113,8 @@ crossorigin="anonymous"
 
 <script>
 var listhobbies=[];
-const student={};
+//const student={};
+var student={};
 var btnReset,btnNext,btnBack,imgId,spnImage,spnHobbies,hobbies,idSrcImg;
 
 (()=>{
@@ -125,7 +129,7 @@ var btnReset,btnNext,btnBack,imgId,spnImage,spnHobbies,hobbies,idSrcImg;
 
     (() => {
         if (localStorage.student) {
-            const student = JSON.parse(localStorage.student);
+            student = JSON.parse(localStorage.student);
             if (!student.hasOwnProperty('city') && !student.hasOwnProperty('street') && !student.hasOwnProperty('number')) {
                 alert("You have to fill the data in phase 2");
                 // window.location.href ='phase2.html'; i have to put here the page url of phase 2
