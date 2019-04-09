@@ -132,7 +132,7 @@ var btnReset,btnNext,btnBack,imgId,spnImage,spnHobbies,hobbies,idSrcImg;
             student = JSON.parse(localStorage.student);
             if (!student.hasOwnProperty('city') && !student.hasOwnProperty('street') && !student.hasOwnProperty('number')) {
                 alert("You have to fill the data in phase 2");
-                // window.location.href ='phase2.html'; i have to put here the page url of phase 2
+                window.location.href ='phase2.html'; //i have to put here the page url of phase 2
             }
             else  {
                 //for display details after refresh
@@ -201,10 +201,11 @@ function saveDetails() {
         saveToObjectDetails();
         spnImage.className='error hidden';
       /*  spnHobbies.className='error hidden';*/
-      //   window.location.href="phase4.html";
+        window.location.href="phase4.html";
     }
 }
 function resetDetails(){
+    spnImage.className='error hidden';
     idSrcImg.value="";
     imgId.src="";
     for (const hobby of hobbies) {
@@ -215,7 +216,7 @@ function resetDetails(){
 
 }
 btnBack.addEventListener('click',()=>{
-//   window.location.href="phase2.html";
+    window.location.href="phase2.html";
 });
 </script>
 </html>
