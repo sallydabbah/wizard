@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <title>Document</title>
+  <style>
+    button {
+      margin: 10px
+    }
+
+    label {
+      color: blue
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+    }
+
+    body {
+      background: linear-gradient(to right, #9cc4d8, #7e92b2);
+
+    }
+    .card{
+      background: linear-gradient(to right, #9cc4d8, #7e92b2);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="alert alert-success" role="alert">
+    Student Details
+  </div>
+  <div class="container">
+    <div class="row mt-6">
+      <div class="col-md-6">
+        <div>
+          <div id="students-gallery" class="row">
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <img src="https://cdn2.iconfinder.com/data/icons/security-1/512/user_profiles-512.png
+https://cdn2.iconfinder.com/data/icons/security-1/512/user_profiles-512.png
+">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div>
+            <a href="#" id='backLink'>
+          <button class="btn btn-primary" id='back'>Back</button> </a>
+          &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+          <a href="#" id='saveLink'>
+          <button class="btn btn-primary" id='save' href='#'>Save</button>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script>
+       
+            // Adding reference to Html elements
+            const studentsGallery = document.querySelector('#students-gallery'),
+                img=document.querySelector('img');
+                saveBtn = document.querySelector('#save'),
+                backBtn = document.querySelector('#back'),
+                saveLink = document.querySelector('#saveLink'),
+                backLink = document.querySelector('#backLink');
+
+            /*if(localStorage.student){
+              const student=JSON.parse(localStorage.student);
+              } */
+            const student = {
+                name: 'sally',
+                course: 'Js',
+                hobbies: ['dancing', 'call'],
+                bd: '27.5',
+                city: 'Dier el assad',
+                street:'555',
+                number:'0500000',
+                img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwzuIbPPuVhStj6I01vpNVNoPpC-64P9pETxlJV4W7WRdlIHaW0g'
+            };
+            
+            // Submitting current student to html elements (to student card).
+            localStorage.student = JSON.stringify(student);
+            studentsGallery.innerHTML += `        
+                        <div class="card mb-3" style="width: 600px;">
+                                <div class="row no-gutters">
+                                  <div class="col-md-12">
+                                    <div class="card-body">
+                                      <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action active">
+                                              Details:
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="name">"${student.name}"</a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="city">"${student.city}"</a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="number">"${student.number}"</a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="street">"${student.street}"</a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="birthday">"${student.bd}"</a>
+
+                                            <a href="#" class="list-group-item list-group-item-action" >"${student.course}"</a>
+                                            <a href="#" class="list-group-item list-group-item-action" id="hobbies">"${student.hobbies.join(', ')}"</a>
+
+                                            
+                                          </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>`;
+                              img.src=student.img;
+
+            // Event listeners to buttons :
+
+            //Deleting JSOn and Navigate to phase 1.
+            saveBtn.addEventListener('click', () => {
+                localStorage.clear();
+                saveLink.href = 'phase1.html';
+            });
+            // Loading data to phase3 elements and navigate to phase3.html(previous phase).
+            backBtn.addEventListener('click', () => {
+                backLink.href = 'phase3.html';
+            });
+
+
+    </script>
+</body>
+
+</html>
