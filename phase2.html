@@ -15,7 +15,6 @@
     button{
         margin: 10px
     }
-
     label{
         color: blue
     }
@@ -25,12 +24,10 @@
     }
     body{
        background: linear-gradient(to right, #9cc4d8, #7e92b2);;
-
     }
 .hidden{
   display: none
 }
-
     
 </style>
 </head>
@@ -105,8 +102,8 @@ buttonReset.addEventListener("click",()=>{
                 //for display details after refresh
                 if (student.hasOwnProperty('city') && student.hasOwnProperty('street')  && student.hasOwnProperty('number')) {
                   cityInput.value=student.city;
-                  streetInput.value=street;
-                  numberInput.value=numberInput;
+                  streetInput.value=student.street;
+                  numberInput.value=student.number;
                    
                 }
             }
@@ -126,13 +123,12 @@ buttonReset.addEventListener("click",()=>{
       numberSpan.className= numberSpan.className.replace('hidden','');
       result=false;
     }
-
     
     
     return true;
 }
 function saveToObjectDetails(){
-student.city=listhobbies;
+student.city=cityInput.value;
 student.street=streetInput.value;
 student.number=numberInput.value;
 localStorage.student = JSON.stringify(student);
@@ -147,17 +143,14 @@ function saveDetails() {
         citySpan.className="hidden";
         streetSpan.className='hidden';
         numberSpan.className="hidden";
-
     }
 }
-
 buttonNext.addEventListener("click",()=>{
 saveDetails();
 } );
 buttonBack.addEventListener("click",()=>{
  window.location.href ='phase1.html';
 } );
-
 </script>
 </div>
 
