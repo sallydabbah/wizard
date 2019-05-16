@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+      />
+    <title>Document</title>
+    <style>
+      span{
+        color:red;
+      }
+    button{
+        margin: 10px
+    }
+    label{
+        color: blue
+    }
+    img{
+        width: 300px;
+        height: 300px;
+    }
+    body{
+       background: linear-gradient(to right, #9cc4d8, #7e92b2);;
+    }
+.hidden{
+  display: none
+}
+    
+</style>
+</head>
+<body>
+        <div class="alert alert-success" role="alert">
+                Student Details
+              </div>
+<div class="container">
+        <div class="row mt-6">
+                <div class="col-md-6">
+        <div>
+                <div class="form-group">
+                  <label for="cityInput">City</label><span class="hidden" id="citySpan">*</span>
+                  <input type="email" class="form-control" id="cityInput" placeholder="City">
+
+                </div>
+                <div class="form-group">
+                        <label for="streetInput">Street</label><span class="hidden" id="streetSpan">*</span>
+                        <input type="email" class="form-control" id="streetInput" placeholder="Street">
+                        
+                      </div>
+                      <div class="form-group">
+                            <label for="numberInput">Number</label><span class="hidden" id="numberSpan">*</span>
+                            <input type="email" class="form-control" id="numberInput" placeholder="Street">
+                            
+                          </div>
+                     
+            </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        <img src="https://cdn2.iconfinder.com/data/icons/security-1/512/user_profiles-512.png">
+                    </div>
+                    </div>
+                   
+                    <div class="row">
+                            <div class="col-md-5">
+                                <div>
+                            <button class="btn btn-primary"id='buttonBack'>Back</button>
+                            <button class="btn btn-primary" id="buttonReset">Reset</button>
+                            <button class="btn btn-primary"id='buttonNext'>Next</button>
+                        </div>
+                         </div>
+                         
+                    </div>
+<script>
+(()=>{
+buttonReset=document.querySelector('#buttonReset');
+buttonBack=document.querySelector('#buttonBack');
+buttonNext=document.querySelector('#buttonNext');
+cityInput=document.querySelector('#cityInput');
+streetInput=document.querySelector('#streetInput');
+numberInput=document.querySelector('#numberInput');
+cityInput=document.querySelector('#cityInput');
+});
+buttonReset.addEventListener("click",()=>{
+  streetInput.value="";
+  numberInput.value="";
+  cityInput.value="";
+  citySpan.className="hidden";
+  streetSpan.className='hidden';
+  numberSpan.className="hidden";
+} );
+(() => {
+        if (localStorage.student) {
+            student = JSON.parse(localStorage.student);
+            if (!student.hasOwnProperty('name') && !student.hasOwnProperty('email') && !student.hasOwnProperty('bd')) {
+                alert("You have to fill the data in phase 1");
+                // window.location.href ='phase1.html'; i have to put here the page url of phase 1
+            }
+            else  {
+                //for display details after refresh
+                if (student.hasOwnProperty('city') && student.hasOwnProperty('street')  && student.hasOwnProperty('number')) {
+                  cityInput.value=student.city;
+                  streetInput.value=student.street;
+                  numberInput.value=student.number;
+                   
+                }
+            }
+        }
+    })();
+    function validateInputs(){
+  result=true;
+    if(cityInput.value.length==0){
+      citySpan.className= citySpan.className.replace('hidden','');
+      result=false;
+    }
+    if(streetInput.value.length==0){
+      streetSpan.className= streetSpan.className.replace('hidden','');
+      result=false;
+    }
+    if(streetInput.value.length==0){
+      numberSpan.className= numberSpan.className.replace('hidden','');
+      result=false;
+    }
+    
+    
+    return result;
+}
+function saveToObjectDetails(){
+student.city=cityInput.value;
+student.street=streetInput.value;
+student.number=numberInput.value;
+localStorage.student = JSON.stringify(student);
+}
+function saveDetails() {
+    
+    var isOK = validateInputs();
+    
+    
+    if(isOK){
+        saveToObjectDetails();
+        citySpan.className="hidden";
+        streetSpan.className='hidden';
+        numberSpan.className="hidden";
+    }
+}
+buttonNext.addEventListener("click",()=>{
+saveDetails();
+} );
+buttonBack.addEventListener("click",()=>{
+ window.location.href ='phase1.html';
+} );
+</script>
+</div>
+
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+</body>
+</html>
